@@ -19,3 +19,4 @@ android.archs = arm64-v8a, armeabi-v7a
 package.id = btapp
 android.features = android.hardware.bluetooth
 [buildozer]
+warn_on_root = 1
