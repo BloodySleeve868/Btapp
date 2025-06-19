@@ -5,8 +5,13 @@ from kivy.uix.button import Button
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 
-from jnius import autoclass, cast
-from android.permissions import request_permissions, Permission
+# Try importing Android permissions (only works on real device)
+try:
+    from android.permissions import request_permissions, Permission
+    from jnius import autoclass
+    android_available = True
+except ImportError:
+    android_available = False
 
 class MainLayout(BoxLayout):
     def __init__(self, **kwargs):
@@ -29,9 +34,12 @@ class MainLayout(BoxLayout):
     def scan_devices(self, instance):
         self.result_box.clear_widgets()
 
+        if not android_available:
+            self.result_box.add_widget(Label(text="Android permissions not available."))
+            return
+
         Context = autoclass('org.kivy.android.PythonActivity').mActivity
         BluetoothAdapter = autoclass('android.bluetooth.BluetoothAdapter')
-        BluetoothDevice = autoclass('android.bluetooth.BluetoothDevice')
 
         adapter = BluetoothAdapter.getDefaultAdapter()
 
@@ -49,9 +57,13 @@ class MainLayout(BoxLayout):
 
 class BTApp(App):
     def build(self):
-        request_permissions([Permission.BLUETOOTH, Permission.BLUETOOTH_ADMIN, Permission.ACCESS_FINE_LOCATION])
+        if android_available:
+            request_permissions([
+                Permission.BLUETOOTH,
+                Permission.BLUETOOTH_ADMIN,
+                Permission.ACCESS_FINE_LOCATION
+            ])
         return MainLayout()
 
 if __name__ == '__main__':
     BTApp().run()
-
