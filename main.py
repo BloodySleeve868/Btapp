@@ -5,6 +5,9 @@ from kivy.uix.button import Button
 from jnius import autoclass
 from android.permissions import request_permissions, Permission
 
+android.ndk_path = $ANDROID_NDK
+android.sdk_path = $ANDROID_SDK
+
 class MainLayout(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(orientation='vertical', **kwargs)
