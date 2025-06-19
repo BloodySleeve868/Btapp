@@ -13,6 +13,7 @@ android.api = 30
 android.ndk_path = $ANDROID_NDK
 android.sdk_path = $ANDROID_SDK
 android.ndk_api = 21
+android.ndk = 23b
 android.minapi = 21
 entrypoint = main.py
 android.packaging = apk
