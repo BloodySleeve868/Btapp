@@ -20,6 +20,8 @@ android.packaging = apk
 fullscreen = 1
 android.hide_statusbar = 0
 android.archs = arm64-v8a, armeabi-v7a
+android.gradle_dependencies = androidx.appcompat:appcompat:1.0.2
+android.packaging_options = exclude META-INF/DEPENDENCIES
 package.id = btapp
 android.features = android.hardware.bluetooth
 [buildozer]
