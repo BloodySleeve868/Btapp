@@ -12,8 +12,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Build APK using working Buildozer Docker image
+      - name: Build APK using complete Buildozer image
         run: |
           docker run --rm -v ${{ github.workspace }}:/home/user/app \
-            kivy/buildozer \
+            ghcr.io/coding-cat/buildozer-android:latest \
             bash -c "cd /home/user/app && buildozer android debug"
