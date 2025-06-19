@@ -20,3 +20,4 @@ package.id = btapp
 android.features = android.hardware.bluetooth
 [buildozer]
 warn_on_root = 1
+
